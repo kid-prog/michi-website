@@ -69,9 +69,14 @@ svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; 
 .header {
   position: fixed; inset: 0 0 auto; z-index: 50;
   height: var(--header-h);
+}
+/* 背景とぼかしは疑似要素に置く。.header 自体に backdrop-filter を付けると、
+   中の position: fixed（スマホのメニュー）が画面ではなくヘッダー基準になり、背景が途中で切れる */
+.header::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
   transition: background-color .3s, box-shadow .3s;
 }
-.header.is-scrolled { background: rgba(14, 18, 48, .92); backdrop-filter: blur(12px); box-shadow: 0 6px 24px -12px rgba(0,0,0,.5); }
+.header.is-scrolled::before { background: rgba(14, 18, 48, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 6px 24px -12px rgba(0,0,0,.5); }
 .header__inner {
   height: 100%; display: flex; align-items: center; gap: 28px;
   width: min(100% - 32px, 1320px); margin-inline: auto; color: #fff;
@@ -109,7 +114,8 @@ svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; 
   .nav a { padding: 18px 4px; border-bottom: 1px solid rgba(255,255,255,.1); }
   .nav a::after { display: none; }
   .nav__cta { display: block; margin-top: 24px; text-align: center; border: 0 !important; background: var(--yellow); color: var(--ink); border-radius: 999px; font-weight: 700; }
-  .header { background: rgba(14, 18, 48, .92); backdrop-filter: blur(12px); }
+  .header::before { background: rgba(14, 18, 48, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .nav { overflow-y: auto; }
   .brand__mark { width: 40px; }
   .brand__ja { font-size: 1rem; }
 }

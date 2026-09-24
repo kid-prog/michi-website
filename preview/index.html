@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>スマホ表示の確認｜株式会社MICHI</title>
+<!-- 確認用のページ。本番（Xサーバー）には上げない -->
+<style>
+  :root { --bg: #e9ebf1; --ink: #0e1230; --yellow: #ffd200; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Noto Sans JP", system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+  header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 16px 24px; background: var(--ink); color: #fff; }
+  h1 { font-size: 1rem; margin: 0 auto 0 0; }
+  .sizes { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sizes button { font: inherit; font-size: .85rem; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35); background: transparent; color: #fff; cursor: pointer; }
+  .sizes button[aria-pressed="true"] { background: var(--yellow); color: var(--ink); border-color: var(--yellow); font-weight: 700; }
+  header a { color: var(--yellow); font-size: .85rem; }
+  main { display: flex; justify-content: center; padding: 32px 16px 48px; }
+  .phone { background: #111; padding: 14px; border-radius: 44px; box-shadow: 0 30px 60px -20px rgba(14,18,48,.45); }
+  .phone iframe { display: block; border: 0; border-radius: 30px; background: #fff; transition: width .3s, height .3s; }
+  .note { text-align: center; font-size: .85rem; color: #5d6275; margin: -24px 16px 32px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>スマホ表示の確認</h1>
+  <div class="sizes" role="group" aria-label="画面サイズ">
+    <button data-w="375" data-h="667">iPhone SE（375）</button>
+    <button data-w="393" data-h="852" aria-pressed="true">iPhone 15（393）</button>
+    <button data-w="430" data-h="932">iPhone 15 Pro Max（430）</button>
+    <button data-w="412" data-h="915">Android（412）</button>
+    <button data-w="768" data-h="1024">タブレット（768）</button>
+  </div>
+  <a href="../" target="_blank" rel="noopener">サイトを新しいタブで開く</a>
+</header>
+<main>
+  <div class="phone"><iframe id="frame" src="../" title="スマホ表示" width="393" height="852"></iframe></div>
+</main>
+<p class="note">画面の中をスクロール・タップして操作できます。実機では同じURL（このページの1つ上）がそのままスマホ表示になります。</p>
+<script>
+  const frame = document.getElementById('frame');
+  const buttons = document.querySelectorAll('.sizes button');
+  const fit = (w, h) => {
+    // 画面が低いPCでは高さを縮めて収める（幅はそのまま＝スマホの見え方は変わらない）
+    const maxH = Math.max(480, window.innerHeight - 170);
+    frame.width = w;
+    frame.height = Math.min(h, maxH);
+  };
+  buttons.forEach((b) => b.addEventListener('click', () => {
+    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    fit(+b.dataset.w, +b.dataset.h);
+  }));
+  fit(393, 852);
+</script>
+</body>
+</html>

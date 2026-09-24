@@ -15,6 +15,7 @@ assets/css/style.css
 assets/js/main.js
 assets/img/         … 画像（施工事例のサムネイル・ロゴ）
 lp/                 … LPページ（これから作成）
+preview/            … スマホ表示の確認用ページ（本番のサーバーには上げない）
 ```
 
 - 動画は YouTube（株式会社MICHI のチャンネル）から埋め込み。ファイルとしては持っていない
@@ -35,6 +36,7 @@ lp/                 … LPページ（これから作成）
 3. ファイルマネージャー（または FTP）で `/<ドメイン>/public_html/` にアップロード
    - `index.html` が `public_html` の直下に来るように置く
    - 最初からある `index.html`（Xserver の初期ページ）は上書きしてよい
+   - `preview/` と `README.md` はアップロードしない
 4. Xserver のメール設定で送信用アドレス（例: `info@<ドメイン>`）を作成
 5. `contact.php` の2行を書き換える
    - `TO_ADDRESS` … お問い合わせを受け取るアドレス

@@ -43,6 +43,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; 
 
 .container { width: min(100% - 32px, var(--container)); margin-inline: auto; }
 .sp { display: none; }
+.nw { display: inline-block; } /* 語句の途中で改行させない */
 @media (max-width: 767px) { .sp { display: inline; } .pc { display: none; } }
 
 /* ---------- Buttons ---------- */

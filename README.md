@@ -37,6 +37,7 @@ preview/            … スマホ表示の確認用ページ（本番のサー�
    - `index.html` が `public_html` の直下に来るように置く
    - 最初からある `index.html`（Xserver の初期ページ）は上書きしてよい
    - `preview/` と `README.md` はアップロードしない
+   - `index.html` の `og:url` と `og:image` を独自ドメインのURLに書き換える（LINE等で共有したときの画像）
 4. Xserver のメール設定で送信用アドレス（例: `info@<ドメイン>`）を作成
 5. `contact.php` の2行を書き換える
    - `TO_ADDRESS` … お問い合わせを受け取るアドレス

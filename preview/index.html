@@ -6,6 +6,10 @@
 <meta name="robots" content="noindex">
 <title>スマホ表示の確認｜株式会社MICHI</title>
 <!-- 確認用のページ。本番（Xサーバー）には上げない -->
+<script>
+  // スマホ・タブレットで開いたときは、確認用の枠を出さずにサイトをそのまま表示する
+  if (window.matchMedia('(max-width: 820px)').matches) location.replace('../');
+</script>
 <style>
   :root { --bg: #e9ebf1; --ink: #0e1230; --yellow: #ffd200; }
   * { box-sizing: border-box; }

@@ -48,8 +48,22 @@
   const heroVideo = document.getElementById('heroVideo');
   const conn = navigator.connection || {};
   const lightMode = reduceMotion || conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
+  // スマホ・タブレットでは YouTube の再生ボタンが動画の上に出てしまうため、動画は流さない
+  const touchDevice = window.matchMedia('(max-width: 1024px), (hover: none)').matches;
+
+  // 動画を流さない端末では、施工写真をゆっくり切り替える
+  const slides = document.querySelectorAll('.hero__slide');
+  if ((lightMode || touchDevice) && !reduceMotion && slides.length > 1) {
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove('is-active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-active');
+    }, 6000);
+  }
+
   // 実際に再生が始まってから表示する（自動再生が止められた端末では静止画のまま）
-  if (heroVideo && !lightMode) {
+  if (heroVideo && !lightMode && !touchDevice) {
     const id = heroVideo.dataset.video;
     const holder = document.createElement('div');
     heroVideo.appendChild(holder);
